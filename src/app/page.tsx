@@ -19,7 +19,8 @@ export default async function Page() {
 
   try {
     const res = await fetch(
-      "https://app.ftoyd.com/fronttemp-service/fronttemp"
+      "https://app.ftoyd.com/fronttemp-service/fronttemp",
+      { cache: "no-store" }
     );
     const json = await res.json();
     matches = json.data.matches;
