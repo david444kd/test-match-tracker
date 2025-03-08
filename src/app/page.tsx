@@ -15,7 +15,7 @@ interface Match {
 
 export default async function Page() {
   let matches: Match[] = [];
-  let error: string | null = null;
+  let errorMessage: string | null = null;
 
   try {
     const res = await fetch(
@@ -25,7 +25,7 @@ export default async function Page() {
     matches = json.data.matches;
   } catch (error) {
     console.error("Failed to fetch matches:", error);
-    error = "Ошибка: не удалось загрузить информацию";
+    errorMessage = "Ошибка: не удалось загрузить информацию";
   }
 
   return (
@@ -47,7 +47,7 @@ export default async function Page() {
         </div>
 
         <div className="flex items-center space-x-4">
-          {error && (
+          {errorMessage && (
             <div className="text-red-400 text-sm bg-white/5 px-3 py-2 rounded-md flex items-center justify-center gap-2">
               <svg
                 width="24"
@@ -65,7 +65,7 @@ export default async function Page() {
                 />
               </svg>
 
-              {error}
+              {errorMessage}
             </div>
           )}
           <RefreshButton />
@@ -73,7 +73,7 @@ export default async function Page() {
       </header>
 
       <section className="px-20 py-10 mx-auto">
-        {error ? (
+        {errorMessage ? (
           <p className="mt-8 text-center text-lg">
             Попробуйте обновить страницу позже.
           </p>
